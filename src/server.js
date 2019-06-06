@@ -4,14 +4,17 @@ import express from 'express';
 import wixExpressCsrf from '@wix/wix-express-csrf';
 import wixExpressRequireHttps from '@wix/wix-express-require-https';
 
-module.exports = (app, context) => {
+module.exports = (app) => {
   app.use(wixExpressCsrf());
   app.use(wixExpressRequireHttps);
 
   app.use('/static', express.static('static'));
 
   app.get('/', (req, res) => {
-    const baseUrl = url.resolve(`${req.protocol}://${req.headers.host}`, req.path);
+    const baseUrl = url.resolve(
+      `${req.protocol}://${req.headers.host}`,
+      req.path,
+    );
 
     res.json({
       success: true,
