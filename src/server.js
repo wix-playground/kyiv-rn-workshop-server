@@ -13,7 +13,6 @@ module.exports = (app) => {
   app.get('/', (req, res) => {
     const toAbsolute = (...path) => [
       `${req.protocol}://${req.headers.host}`,
-      req.url,
       ...path,
     ].map(p => p.replace(/(^\/|\/$)/g, '')).filter(Boolean).join('/');
 
