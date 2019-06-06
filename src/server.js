@@ -11,6 +11,10 @@ module.exports = (app) => {
   app.use('/static', express.static('static'));
 
   app.get('/', (req, res) => {
+    res.send('Use <a href="/users.json">/users.json</a>');
+  });
+
+  app.get('/users.json', (req, res) => {
     const toAbsolute = (...path) => [
       `${req.protocol}://${req.headers.host}`,
       ...path,
