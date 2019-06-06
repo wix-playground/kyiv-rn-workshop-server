@@ -6,7 +6,7 @@ describe('API', () => {
   beforeAndAfter();
 
   it('should return a valid response', async () => {
-    const url = app.getUrl('/');
+    const url = app.getUrl('/users.json');
     const response = await axios.get(url);
 
     expect(response.data).to.deep.include({

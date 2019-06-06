@@ -1,10 +1,9 @@
 import 'regenerator-runtime/runtime';
-import url from 'url';
 import express from 'express';
 import wixExpressCsrf from '@wix/wix-express-csrf';
 import wixExpressRequireHttps from '@wix/wix-express-require-https';
 
-module.exports = (app) => {
+module.exports = app => {
   app.use(wixExpressCsrf());
   app.use(wixExpressRequireHttps);
 
@@ -15,10 +14,11 @@ module.exports = (app) => {
   });
 
   app.get('/users.json', (req, res) => {
-    const toAbsolute = (...path) => [
-      `${req.protocol}://${req.headers.host}`,
-      ...path,
-    ].map(p => p.replace(/(^\/|\/$)/g, '')).filter(Boolean).join('/');
+    const toAbsolute = (...path) =>
+      [`${req.protocol}://${req.headers.host}`, ...path]
+        .map(p => p.replace(/(^\/|\/$)/g, ''))
+        .filter(Boolean)
+        .join('/');
 
     res.json({
       success: true,
